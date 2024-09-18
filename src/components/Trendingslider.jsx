@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 const Trendingslider = () => {
   const [data, setData] = useState([]);
@@ -9,10 +10,10 @@ const Trendingslider = () => {
   useEffect(() => {
     const fetchData = async () => {
       const api = await fetch(
-        "https://www.themealdb.com/api/json/v1/1/search.php?s"
+        "https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian"
       );
       const data = await api.json();
-      console.log(data.meals);
+      //console.log(data.meals);
       setData(data.meals);
     };
     fetchData();
@@ -32,25 +33,31 @@ const Trendingslider = () => {
   return (
     <>
       <div style={{
+        
         height:'26vh',
         width: '99%',
         margin:'auto',
+        overflow:'hidden'
         //backgroundColor: 'yellow',
+        
+        
        
-        marginTop:'5%',
+        
       }}>
 
         <Slider {...settings}
         style={{
-          margin:'1rem'
+          marginTop:'1rem'
         }}
         >
           {data.map((d) => {
             return (
+              <Link to={`/${d.idMeal}`} key={d.idMeal}>
               <div className="slider2">
                 <img src={d.strMealThumb} alt="" style={{ width: "10rem", height:'8rem' }} />
               </div>
-            );
+              </Link>
+            )
           })}
         </Slider>
       </div>

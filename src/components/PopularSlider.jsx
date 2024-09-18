@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 const PopularSlider = () => {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ const PopularSlider = () => {
         "https://www.themealdb.com/api/json/v1/1/search.php?s"
       );
       const data = await api.json();
-      console.log(data.meals);
+      //console.log(data.meals);
       setData(data.meals);
     };
     fetchData();
@@ -45,10 +46,12 @@ const PopularSlider = () => {
         >
           {data.map((d) => {
             return (
+              <Link to={`/${d.idMeal}`} key={d.idMeal}>
               <div className="slider">
                 <img src={d.strMealThumb} alt="" style={{ width: "18rem", height:'17rem' }} />
               </div>
-            );
+              </Link>
+            )
           })}
         </Slider>
       </div>
