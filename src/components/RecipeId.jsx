@@ -63,22 +63,21 @@ const RecipeId = () => {
                 </div>
               ) : active === 'instruction' ? (
                 <p style={{ fontWeight: 'bold' }}>{data.strInstructions}</p>
-              ) :( <p>
-                <iframe
-                  width="560"
-                  height="315"
-                  src={`https://www.youtube.com/embed/${data.strYoutube.split("v=")[1]}`}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </p>
-              
-              
+              ) : active === 'video' && data.strYoutube ? (
+                <div>
+                  <iframe
+                    width="560"
+                    height="315"
+                    src={`https://www.youtube.com/embed/${data.strYoutube.split("v=")[1]}`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              ) : (
+                <p style={{ fontWeight: 'bold' }}>No video available for this recipe.</p>
               )
-              
-              
             }
 
           </div>
